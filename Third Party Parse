@@ -1,0 +1,28 @@
+# IMPORTING PARSE FUNCTION
+from parse import parse
+
+# USING THE SAME LOG FROM EXTRACTING DATA FROM STRUCTURED STRINGS 
+log = '[2024-03-19T01:09:23.267894] - SALE - PRODUCT: 1345 - PRICE:$09.99'
+
+# ANALYZING AND DESCRIBING IT AS WE'LL DO WHEN TRYING TO PRINT IT
+FORMAT = '[{date}] - SALE - PRODUCT: {product} - PRICE: ${price}'
+
+# RUNNING PARSE AND CHECKING THE RESULT
+result = parse(FORMAT, log)
+print("Result without type specification:", result)
+
+# DEFINING THE TYPES TO BE PARSED BECAUSE THE RESULTS ARE ALL STRINGS
+FORMAT = '[{date:ti}] - SALE - PRODUCT: {product:d} - PRICE:${price:05.2f}'
+
+# PARSING ONCE AGAIN
+result = parse(FORMAT, log)
+print("Result with type specification:", result)
+
+# DEFINING A CUSTOM TYPE FOR THE PRICE TO AVOID ISSUES WITH THE FLOAT TYPE
+from decimal import Decimal
+def price(string):
+    return Decimal(string)
+
+FORMAT = '[{date:ti}] - SALE - PRODUCT: {product:d} - PRICE:${price:price}'
+parsed_result = parse(FORMAT, log, {'price': price})
+print("Result with custom type for price:", parsed_result)
