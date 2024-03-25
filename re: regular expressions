@@ -1,0 +1,27 @@
+import re
+
+# Matching a pattern that is not at the start of the string
+print(re.search(r'LOG', 'SOME LOGS'))
+
+# Matching a pattern that is only at the start of the string
+print(re.search(r'^LOGs', 'LOGs'))
+print(re.search(r'^LOGs', 'SOME LOGS'))
+
+# Matching a pattern only at the end of the string
+print(re.search(r'LOGS$', 'SOME LOGS'))
+print(re.search(r'LOG$', 'SOME LOGS'))
+
+# Matching the word 'thing' (not excluding things), but not something or anything. 
+# Not the \b at the start of the second pattern
+STRING = 'something in the things she shows me'
+match = re.search(r'thing', STRING)
+print(STRING[:match.start()], STRING[match.start():match.end()], STRING[match.end():])
+match = re.search(r'\bthing', STRING)
+print(STRING[:match.start()], STRING[match.start():match.end()], STRING[match.end():])
+
+# Matching a pattern that's only numbers and dashes
+print(re.search(r'[05012312312-]+', 'the phone number is 050-132-132-12'))
+print(re.search(r'[0123456789-]+', 'the phone number is 1234-567-890').group())
+
+# Matching an email address naively
+print(re.search(r'\S+@\S+', 'my email is email.123@test.com').group())
