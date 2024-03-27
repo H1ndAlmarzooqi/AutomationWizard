@@ -1,0 +1,18 @@
+import re
+
+# Example 2: Matching a phone pattern
+match = re.search(r'the phone number is ([\d-]+)', '37: the phone number is 1234-567-890')
+print(match.group())
+print(match.group(1))
+
+# Example 3: Compiling a pattern for capturing a case insensitive pattern with a yes|no option
+pattern = re.compile(r'The answer to question (\w+) is (yes|no)', re.IGNORECASE)
+match = pattern.search('Naturaly, the answer to question 3b is YES')
+print(match.groups())
+
+# Example 4: Matching all occurrences of cities and state abbreviations in the text
+PATTERN = re.compile(r'([A-Z][\w\s]+)\W(TX|OR|OH|MI)')
+TEXT ='the jackalopes are the team of Odessa,TX while the knights are native of Corvallis OR and the mud hens come from Toledo.OH; the whitecaps have their base in Grand Rapids,MI'
+matches = list(PATTERN.finditer(TEXT))
+print(matches)
+print(matches[0].groups())
