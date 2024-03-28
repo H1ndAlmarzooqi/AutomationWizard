@@ -1,0 +1,14 @@
+#IMPORTING THE ARGPARSE MODULE WHICH IS USED TO CREATE RICH COMMAND-LINE ARGUMENT PARSING WITH MINIMAL EFFORT
+import argparse
+
+#creating a script that will accept an optional arument for the character to print. the default will be #
+def main(character, number):
+	print(character * number)
+
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser ()
+	parser.add_argument('number', type=int, help='A number')
+	parser.add_argument('-c', type=str, help='Character to print', default='#')
+
+args = parser.parse_args ()
+main(args.c, args.number)
